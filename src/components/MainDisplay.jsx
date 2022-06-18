@@ -10,7 +10,7 @@ const MainDisplay = ( {focused, setMainFocus}) => {
     ? <ContainerMin as={motion.div} whileHover={{ translateY: -3 }}>
       <PageTitle onClick={() => setMainFocus('main')}>powerlines.</PageTitle>
     </ContainerMin>
-    : <Container as={motion.div} whileHover={{ translateY: -1 }}>
+    : <Container as={motion.div} whileHover={{ translateY: -3 }}>
     <PageTitle>powerlines.</PageTitle>
     <Text>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni totam eligendi, atque eum autem vitae esse quae optio. Quae mollitia unde rem repellendus sapiente beatae aperiam, deserunt sit magnam quas?
@@ -43,6 +43,7 @@ const Container = styled.div`
   border-radius: 15px 15px 0 0;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
   background-color: #222222;
+  transition: .1s;
   z-index: 15;`
 
 const ContainerMin = styled.div`
@@ -53,6 +54,7 @@ const ContainerMin = styled.div`
   border-radius: 15px 15px 0 0;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
   background-color: #222222;
+  transition: .1s;
   z-index: 15;`
 
 const Text = styled.div`
@@ -60,6 +62,7 @@ const Text = styled.div`
   font-size: 18px;
   width: 300px;
   height: 90%;
+  cursor: pointer;
   overflow-y: scroll !important;`
 
 const PageTitle = styled.h1`

@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 
 const UserCard = ({ setMainFocus }) => {
   return (
-    <Container onClick={() => setMainFocus('user')} as={motion.div} whileHover={{ translateY: -3 }} >
+    <Container onClick={() => setMainFocus('user')} >
       <Username>timmyha</Username>
     </Container>
   )
@@ -20,6 +20,7 @@ const Container = styled.div`
 const Username = styled.span`
   position: absolute;
   right: 10px;
+  width: 100%;
   color: white;
   font-family: IBM Plex Sans, Helvetica Neue, sans-serif;
   font-style: normal;

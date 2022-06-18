@@ -28,6 +28,7 @@ const Container = styled.div`
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
   background-color: #689BFF;
   align-content: right;
+  transition: .1s;
   z-index: 10;`
 
 const ContainerMin = styled.div`
@@ -45,6 +46,7 @@ const ContainerMin = styled.div`
 const Username = styled.span`
   position: absolute;
   right: 10px;
+  width: 100%;
   color: white;
   font-family: IBM Plex Sans, Helvetica Neue, sans-serif;
   font-style: normal;
