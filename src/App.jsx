@@ -1,49 +1,47 @@
 import { useState, useEffect } from 'react'
-import UserCard from './components/UserCard'
-import MoodCard from './components/MoodCard'
-import GenreCard from './components/GenreCard'
-import MainDisplay from './components/MainDisplay'
 import styled from 'styled-components'
-import supabase from '../utils/supabase'
+import Navbar from './components/Navbar'
+import Body from './components/Body'
+import Dropdown from './components/Dropdown'
 
 function App() {
 
-  const [focused, setFocused] = useState({
-   user: false,
-   moods: false,
-   genres: false,
-   main: false
-})
+  const [menu, setMenu] = useState({
+    genres: false,
+    moods: false,
+    user: false
+  })
 
-console.log(focused)
-
-  const setMainFocus = (id) => {
-    setFocused({
-      [id]: true
-    })
+  const handleDropdown = (id) => {
+   return setMenu((
+      {
+        genres: false,
+        moods: false,
+        user: false,
+        [id]: !menu[id]
+      }
+    ))
   }
-  
+
+  console.log(menu)
   return (
-    <Body>
-      <UserCard
-        focused={focused} 
-        setMainFocus={setMainFocus} />
-      <MoodCard 
-        focused={focused} 
-        setMainFocus={setMainFocus} />
-      <GenreCard
-        focused={focused} 
-        setMainFocus={setMainFocus} />
-      <MainDisplay 
-        focused={focused} 
-        setMainFocus={setMainFocus} />
-    </Body>
+    <Container>
+      <Navbar
+        handleDropdown={handleDropdown} 
+        menu={menu} />
+      <Dropdown
+        menu={menu}
+      />
+      <Body />
+    </Container>
   )
 }
 
-const Body = styled.div`
+const Container = styled.div`
+  font-family: IBM Plex Serif;
   width: 100vw;
   height: 100vh;
-  background-color: transparent;`
+  color: #fff;
+  font-weight: 400;`
 
 export default App
