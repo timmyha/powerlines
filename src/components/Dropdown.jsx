@@ -12,7 +12,7 @@ const Dropdown = ({ menu }) => {
         data-genre={menu.genres}
         initial={{ y: 0}}
         className="genres"
-    ><Genres /></motion.div>
+    ><Genres menu={menu}/></motion.div>
     : menu.moods 
     ? <motion.div
         layout

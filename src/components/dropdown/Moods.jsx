@@ -47,6 +47,11 @@ const Container = styled.nav`
   width: 100vw;
   height: 300px;
   overflow-y: scroll !important;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
 `
 
 const List = styled.ol`

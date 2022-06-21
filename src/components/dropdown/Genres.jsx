@@ -1,8 +1,13 @@
 import styled from "styled-components"
+import { motion } from "framer-motion"
 
 const Genres = ({ menu }) => {
   return (
-    <Container>
+    <Container> 
+      <motion.div
+  animate={{ opacity: 1 }}
+  transition={{ duration: 2 }}
+    >
      <List>
       <ListItem>
         cyberpunk
@@ -38,6 +43,7 @@ const Genres = ({ menu }) => {
         hard sci-fi
       </ListItem>
      </List>
+     </motion.div>
     </Container>
   )
 }
@@ -47,6 +53,10 @@ const Container = styled.nav`
   width: 100vw;
   height: 300px;
   overflow-y: scroll !important;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
 `
 
 const List = styled.ol`
