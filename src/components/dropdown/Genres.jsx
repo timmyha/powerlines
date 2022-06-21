@@ -52,7 +52,7 @@ const Container = styled.nav`
 const List = styled.ol`
   position: absolute;
   flex-direction: column;
-  left: 50px;
+  left: 20%;
 `
 
 const ListItem = styled.li`

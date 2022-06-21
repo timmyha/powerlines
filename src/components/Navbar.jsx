@@ -5,35 +5,35 @@ const Navbar = ({ handleDropdown, menu }) => {
 
   return (
     <Nav>
-        <MainLogo onClick={() => handleDropdown('closed')} className="mainlogo">
-        <span style={{"cursor":"pointer"}}>powerlines.</span>
-        </MainLogo>
-        <MainLogoCollapse>
-          <span style={{"cursor":"pointer"}}>pwrlns.</span>
-        </MainLogoCollapse>
-        <Links>
-          <Genres onClick={() => handleDropdown('genres')}>
-            <span 
-              style={menu.genres ? {"color":"#F1406A"} : {"color":"white"}}>
-                genres
-            </span>
-          </Genres>
-          <Moods onClick={() => handleDropdown('moods')}>
-            <span 
-              style={menu.moods ? {"color":"#F3D25E"} : {"color":"white"}}>
-                moods
-            </span>
-          </Moods>
-        </Links>
+      <MainLogo onClick={() => handleDropdown('closed')} className="mainlogo">
+        <span style={{ "cursor": "pointer" }}>powerlines.</span>
+      </MainLogo>
+      <MainLogoCollapse>
+        <span style={{ "cursor": "pointer" }}>pwrlns.</span>
+      </MainLogoCollapse>
+      <Links>
+        <Genres onClick={() => handleDropdown('genres')}>
+          <span
+            style={menu.genres ? { "color": "#F1406A" } : { "color": "white" }}>
+            genres
+          </span>
+        </Genres>
+        <Moods onClick={() => handleDropdown('moods')}>
+          <span
+            style={menu.moods ? { "color": "#F3D25E" } : { "color": "white" }}>
+            moods
+          </span>
+        </Moods>
+      </Links>
       <RightNav>
         <UserDiv onClick={() => handleDropdown('user')}>
-        <UserCircle />
-        <Username>
-          <span 
-            style={menu.user ? {"color":"#40F1BC"} : {"color":"white"}}>
-             timmyha
+          <UserCircle />
+          <Username>
+            <span
+              style={menu.user ? { "color": "#40F1BC" } : { "color": "white" }}>
+              timmyha
             </span>
-        </Username>
+          </Username>
         </UserDiv>
       </RightNav>
     </Nav>
@@ -47,6 +47,7 @@ const Nav = styled.nav`
   background: #222;
   justify-content: space-between;
   flex-direction: row;
+  z-index: 100000;
 `
 
 const RightNav = styled.div`
@@ -95,7 +96,7 @@ const MainLogoCollapse = styled.h2`
     @media (min-width: 400px) {
     display: none;
   }
-` 
+`
 
 const Links = styled.div`
   display: flex;
