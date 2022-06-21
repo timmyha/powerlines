@@ -44,14 +44,15 @@ const Genres = ({ menu }) => {
 
 const Container = styled.nav`
   position: absolute;
-  width: 100%;
+  width: 100vw;
   height: 300px;
-  left: 50px;
   overflow-y: scroll !important;
 `
 
 const List = styled.ol`
+  position: absolute;
   flex-direction: column;
+  left: 50px;
 `
 
 const ListItem = styled.li`
