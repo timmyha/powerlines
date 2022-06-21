@@ -3,7 +3,7 @@ import styled from "styled-components"
 const Body = () => {
   return (
     <Content>
-      And just like that, we were flapping our wings like birds.
+      body text
     </Content>
   )
 }

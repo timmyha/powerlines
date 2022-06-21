@@ -23,7 +23,6 @@ function App() {
     ))
   }
 
-  console.log(menu)
   return (
     <Container>
       <Navbar

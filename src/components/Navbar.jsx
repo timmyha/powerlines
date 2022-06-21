@@ -2,9 +2,10 @@ import styled from "styled-components"
 
 
 const Navbar = ({ handleDropdown, menu }) => {
+
   return (
     <Nav>
-        <MainLogo className="mainlogo">
+        <MainLogo onClick={() => handleDropdown('closed')} className="mainlogo">
         <span style={{"cursor":"pointer"}}>powerlines.</span>
         </MainLogo>
         <MainLogoCollapse>
