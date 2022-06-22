@@ -59,10 +59,11 @@ const Container = styled.nav`
 }
 `
 
-const List = styled.ol`
+const List = styled.ul`
   position: absolute;
+  list-style: none;
   flex-direction: column;
-  left: 20%;
+  left: 10%;
 `
 
 const ListItem = styled.li`

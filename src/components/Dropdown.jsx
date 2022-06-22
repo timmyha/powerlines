@@ -2,28 +2,33 @@ import styled from "styled-components"
 import { motion } from "framer-motion"
 import Genres from "./dropdown/Genres"
 import Moods from "./dropdown/Moods"
+import { useSnapshot } from 'valtio'
+import store from '../store'
 
 const Dropdown = ({ menu }) => {
+
+  const menuState = useSnapshot(store.menu)
+
   return (
     <Container>
-    { menu.genres
+    { menuState.genres
     ? <motion.div
         layout
-        data-genre={menu.genres}
+        data-genre={menuState.genres}
         initial={{ y: 0}}
         className="genres"
     ><Genres menu={menu}/></motion.div>
-    : menu.moods 
+    : menuState.moods 
     ? <motion.div
         layout
-        data-mood={menu.moods}
+        data-mood={menuState.moods}
         initial={{ y: 0}}
         className="moods"
       ><Moods /></motion.div>
-    : menu.user 
+    : menuState.user 
     ? <motion.div
         layout
-        data-user={menu.user}
+        data-user={menuState.user}
         initial={{ y: 0}}
         className="user"
       />

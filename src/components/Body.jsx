@@ -1,17 +1,20 @@
 import styled from "styled-components"
+import AllPosts from '../pages/AllPosts'
 
 const Body = () => {
   return (
     <Content>
-      body text
+      <AllPosts />
     </Content>
   )
 }
 
-const Content = styled.main`
+const Content = styled.div`
   background-color: #222;
   padding-top: 40px;
   height: 100%;
+  overscroll-y: scroll;
+  padding-bottom: 300px;
   `
 
 export default Body

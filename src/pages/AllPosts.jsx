@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import supabase from '../../utils/supabase'
+import { useSnapshot } from 'valtio'
+import store from '../store'
 
 const AllPosts = () => {
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(true)
+
+
+  const snapshot = useSnapshot(store)
 
   useEffect(() => {
 
@@ -12,8 +15,8 @@ const AllPosts = () => {
       .from('posts')
       .select('*')
 
-      setData(posts)
-      setLoading(false)
+      store.data = posts
+      store.loading = false
     }
     getAllPosts()
   }, [])
@@ -23,9 +26,9 @@ const AllPosts = () => {
   return (
     <>
     {
-      loading
+      store.loading
       ? <div>...loading</div>
-      : <div style={{"white-space":"pre-wrap"}}>{data[0].content} hi</div>
+      : <div style={{"white-space":"pre-wrap"}}>{store.data[0].content} hi</div>
     }
     </>
   )

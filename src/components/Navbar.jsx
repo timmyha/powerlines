@@ -1,7 +1,11 @@
 import styled from "styled-components"
+import { useSnapshot } from 'valtio'
+import store from '../store'
 
 
-const Navbar = ({ handleDropdown, menu }) => {
+const Navbar = ({ handleDropdown }) => {
+
+  const menuState = useSnapshot(store.menu)
 
   return (
     <Nav>
@@ -14,13 +18,13 @@ const Navbar = ({ handleDropdown, menu }) => {
       <Links>
         <Genres onClick={() => handleDropdown('genres')}>
           <span
-            style={menu.genres ? { "color": "#F1406A" } : { "color": "white" }}>
+            style={menuState.genres ? { "color": "#F1406A" } : { "color": "white" }}>
             genres
           </span>
         </Genres>
         <Moods onClick={() => handleDropdown('moods')}>
           <span
-            style={menu.moods ? { "color": "#F3D25E" } : { "color": "white" }}>
+            style={menuState.moods ? { "color": "#F3D25E" } : { "color": "white" }}>
             moods
           </span>
         </Moods>
@@ -30,8 +34,8 @@ const Navbar = ({ handleDropdown, menu }) => {
           <UserCircle />
           <Username>
             <span
-              style={menu.user ? { "color": "#40F1BC" } : { "color": "white" }}>
-              timmyha
+              style={menuState.user ? { "color": "#40F1BC" } : { "color": "white" }}>
+              oursecret
             </span>
           </Username>
         </UserDiv>
@@ -57,7 +61,6 @@ const RightNav = styled.div`
 
 const MainLogo = styled.h2`
   display: flex;
-  position: absolute;
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
@@ -66,6 +69,7 @@ const MainLogo = styled.h2`
   line-height: 83px;
   padding-left: 20px;
   color: #fff;
+  z-index: 10000000;
   padding-top: 0px;
   @media (max-width: 900px) {
     font-size: 50px;
@@ -83,7 +87,6 @@ const MainLogo = styled.h2`
 
 const MainLogoCollapse = styled.h2`
   display: flex;
-  position: absolute;
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
@@ -100,20 +103,9 @@ const MainLogoCollapse = styled.h2`
 
 const Links = styled.div`
   display: flex;
-  position: absolute;
-  justify-content: left;
+  width: 400px;
   font-size: 20px;
   padding-top: 23px;
-  left: 400px;
-  @media (max-width: 900px) {
-    left: 300px;
-  }
-  @media (max-width: 500px) {
-    left: 200px;
-  }
-  @media (max-width: 400px) {
-      left: 150px;
-    }
   }
 `
 
@@ -123,6 +115,7 @@ const Genres = styled.div`
   font-style: normal;
   font-weight: 300;
   line-height: 47px;
+  padding-left: 10px;
   color: #fff;
   transition: .2s;
   &:hover {
@@ -133,6 +126,7 @@ const Genres = styled.div`
 `
 
 const Moods = styled.div`
+  display: flex;
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
@@ -152,18 +146,20 @@ const UserDiv = styled.div`
       color: #40F1BC;
       cursor: pointer;
     }
+    display: flex;
+    padding-top: 20px;
+    flex-direction: row-reverse;
 `
 
 const Username = styled.div`
-  position: absolute;
   right: 55px;
   top: 7px;
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   font-size: 25px;
-  padding-left: 10px;
-  line-height: 47px;
+  padding-right: 60px;
+  line-height: 27px;
   text-align: right;
   @media (max-width: 700px) {
     display: none;
@@ -171,12 +167,13 @@ const Username = styled.div`
 `
 
 const UserCircle = styled.div`
+    position: absolute;
+    top: 14px;
+    right: 16px;
     width: 30px;
     height: 30px;
-    position: absolute;
-    right: 10px;
-    top: 12px;
     background-color: pink;
+    margin-bottom: 10px;
     cursor: pointer;
     border: 4px solid transparent;
     transition: .2s;
