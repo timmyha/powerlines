@@ -35,7 +35,7 @@ const Navbar = ({ handleDropdown }) => {
           <Username>
             <span
               style={menuState.user ? { "color": "#40F1BC" } : { "color": "white" }}>
-              oursecret
+              timmyha
             </span>
           </Username>
         </UserDiv>
