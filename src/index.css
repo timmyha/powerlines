@@ -3,7 +3,6 @@
 html { overflow-y: scroll; }
 body {
   margin: 0px !important;
-  overflow-y: scroll;
   height: 100%;
   width: 100%;
   font-family: IBM Plex Serif;

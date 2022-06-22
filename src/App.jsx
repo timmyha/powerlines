@@ -36,7 +36,6 @@ const Container = styled.div`
   width: 100%;
   height: 200%;
   color: #fff;
-  overscroll: scroll;
   font-weight: 400;`
 
 export default App
