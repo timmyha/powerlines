@@ -91,9 +91,9 @@ const MainLogoCollapse = styled.h2`
   font-style: normal;
   font-weight: 300;
   font-size: 30px;
-  width: 400px;
+  width: 200px;
   line-height: 83px;
-  padding-left: 20px;
+  padding-left: 0px;
   color: #fff;
   padding-top: 6px;
     @media (min-width: 400px) {
@@ -115,7 +115,7 @@ const Genres = styled.div`
   font-style: normal;
   font-weight: 300;
   line-height: 47px;
-  padding-left: 10px;
+  padding-left: 0px;
   color: #fff;
   transition: .2s;
   &:hover {
