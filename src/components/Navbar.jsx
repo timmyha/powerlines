@@ -65,17 +65,22 @@ const MainLogo = styled.h2`
   font-style: normal;
   font-weight: 300;
   font-size: 64px;
-  width: 400px;
+  width: 0px;
   line-height: 83px;
   padding-left: 20px;
   color: #fff;
   z-index: 10000000;
   padding-top: 0px;
-  @media (max-width: 900px) {
+  @media (max-width: 1300px) {
     font-size: 50px;
-    width: 500px;
+    width: 200px;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 900px) {
+    font-size: 30px;
+    padding-top: 6px;
+    width: 400px;
+  }
+  @media (max-width: 700px) {
     font-size: 30px;
     padding-top: 6px;
     width: 300px;
@@ -106,6 +111,9 @@ const Links = styled.div`
   width: 400px;
   font-size: 20px;
   padding-top: 23px;
+  @media (max-width: 800px) {
+    width: 400px;
+  }
   }
 `
 
