@@ -44,14 +44,13 @@ const Moods = ({ menu }) => {
 
 const Container = styled.nav`
   position: absolute;
-  width: 100vw;
+  width: 100%;
   height: 300px;
   overflow-y: scroll !important;
   scrollbar-width: none;
   &::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
-
 `
 
 const List = styled.ul`
@@ -62,7 +61,7 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  width: 100%;
+  width: 90%;
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;

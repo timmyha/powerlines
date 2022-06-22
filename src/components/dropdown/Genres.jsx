@@ -50,7 +50,7 @@ const Genres = ({ menu }) => {
 
 const Container = styled.nav`
   position: absolute;
-  width: 100vw;
+  width: 100%;
   height: 300px;
   overflow-y: scroll !important;
   scrollbar-width: none;
