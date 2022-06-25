@@ -11,9 +11,9 @@ const Body = () => {
 
 const Content = styled.div`
   background-color: #222;
-  padding-top: 40px;
+  padding-top: 200px;
   height: 100vh;
-  padding-bottom: 300px;
+  padding-bottom: 900px;
   `
 
 export default Body

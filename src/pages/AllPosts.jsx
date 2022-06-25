@@ -22,8 +22,6 @@ const AllPosts = () => {
     getAllPosts()
   }, [])
 
-  
-
   return (
     <>
     {
@@ -33,7 +31,7 @@ const AllPosts = () => {
         ...loading.
           
       </Container>
-      : <Container style={{"white-space":"pre-wrap"}}>
+      : <Container style={{"whiteSpace":"pre-wrap"}}>
         <Title>{store.data[0].title}</Title>
         {store.data[0].content}
         </Container>

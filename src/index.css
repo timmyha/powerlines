@@ -19,7 +19,8 @@ code {
 }
 
 .genres {
-  background: transparent;
+  background: black;
+  margin-top: 60px !important;
   width: 100%;
   height: 300px;
   display: flex;
@@ -36,6 +37,7 @@ code {
 
 .moods {
   background: transparent;
+  padding-top: 60px;
   width: 100%;
   height: 300px;
   display: flex;
@@ -52,6 +54,7 @@ code {
 
 .user {
   background: transparent;
+  padding-top: 60px;
   width: 100%;
   height: 300px;
   display: flex;
@@ -68,8 +71,8 @@ code {
 
 .child {
   width: 100%x;
-  height: 4px;
+  margin-top: 60px !important;
+  height: 3px;
   transition: .2s;
-
-  background: transparent;
+  background: inherit;
 }

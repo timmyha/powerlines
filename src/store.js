@@ -7,7 +7,12 @@ let store = proxy({
     user: false
   },
   loading: true,
-  data: []
+  data: [],
+  userData: [],
+  signIn: {
+    username: '',
+    password: ''
+  }
 })
 
 export default store

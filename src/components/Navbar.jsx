@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import { useSnapshot } from 'valtio'
 import store from '../store'
+import supabase from "../../utils/supabase"
 
 
 const Navbar = ({ handleDropdown }) => {
 
-  const menuState = useSnapshot(store.menu)
+  const state = useSnapshot(store)
+  const user = supabase.auth.user()
 
   return (
     <Nav>
@@ -18,26 +20,41 @@ const Navbar = ({ handleDropdown }) => {
       <Links>
         <Genres onClick={() => handleDropdown('genres')}>
           <span
-            style={menuState.genres ? { "color": "#F1406A" } : { "color": "white" }}>
+            style={state.menu.genres ? { "color": "#F1406A" } : { "color": "white" }}>
             genres
           </span>
         </Genres>
         <Moods onClick={() => handleDropdown('moods')}>
           <span
-            style={menuState.moods ? { "color": "#F3D25E" } : { "color": "white" }}>
+            style={state.menu.moods ? { "color": "#F3D25E" } : { "color": "white" }}>
             moods
           </span>
         </Moods>
       </Links>
       <RightNav>
         <UserDiv onClick={() => handleDropdown('user')}>
-          <UserCircle />
-          <Username>
-            <span
-              style={menuState.user ? { "color": "#40F1BC" } : { "color": "white" }}>
-              timmyha
-            </span>
-          </Username>
+          {user ?
+            <>
+              <UserCircle style={user && { "background": `url(${state.userData.avatar})` }} />
+              <Username>
+                <span
+                  style={state.menu.user ? { "color": "#40F1BC" } : { "color": "white" }}>
+                  {state.userData.display_name}
+                </span>
+              </Username>
+            </>
+            : state.menu.user === true
+              ? <UserCircle style={user === null && { "background": "#222" }}>
+                <SignInText>
+                  sign&nbsp;in.
+                </SignInText>
+              </UserCircle>
+              : <UserCircle style={user === null && { "opacity": ".4" }}>
+                <SignInText>
+                  sign&nbsp;in.
+                </SignInText>
+              </UserCircle>
+          }
         </UserDiv>
       </RightNav>
     </Nav>
@@ -46,9 +63,11 @@ const Navbar = ({ handleDropdown }) => {
 
 const Nav = styled.nav`
   display: flex;
+  position: absolute;
   height: 60px;
   width: 100%;
   background: #222;
+  top: 0px !important;
   justify-content: space-between;
   flex-direction: row;
   z-index: 100000;
@@ -160,13 +179,11 @@ const UserDiv = styled.div`
 `
 
 const Username = styled.div`
-  right: 55px;
-  top: 7px;
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   font-size: 25px;
-  padding-right: 60px;
+  margin-right: 70px !important;
   line-height: 27px;
   text-align: right;
   @media (max-width: 700px) {
@@ -178,14 +195,22 @@ const UserCircle = styled.div`
     position: absolute;
     top: 14px;
     right: 16px;
-    width: 30px;
-    height: 30px;
-    background-color: pink;
-    margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+    background-size: 40px !important;
     cursor: pointer;
-    border: 4px solid transparent;
     transition: .2s;
     border-radius: 30px;
+    border: 1px solid #40F1BC;
 `
+
+const SignInText = styled.span`
+  display: flex;
+  color: #fff;
+  font-size: 10px;
+  font-family: IBM Plex Sans;
+  margin-top: 12px !important;
+  margin-left: 4px !important;
+  width: 20px;`
 
 export default Navbar

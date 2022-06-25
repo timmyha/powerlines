@@ -1,26 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import Navbar from './components/Navbar'
 import Body from './components/Body'
 import Dropdown from './components/Dropdown'
 import { useSnapshot } from 'valtio'
+import supabase from '../utils/supabase'
 import store from './store'
 
 function App() {
 
+  const user = supabase.auth.user()
   const snapshot = useSnapshot(store)
+
+  // loads user profile data
+  useEffect(() => {
+    const getUserInfo = async() => {
+      let { data: profile, error } = await supabase
+      .from('profile')
+      .select('*')
+
+      store.userData = profile[0]
+    }
+    if (user) {
+      getUserInfo();
+    }
+  },[])
   
   const handleDropdown = (id) => {
    return store.menu = {
-        genres: false,
-        moods: false,
-        user: false,
+
         [id]: !store.menu[id]
       }
   }
-
-  console.log(store)
-
 
   return (
     <Container>
