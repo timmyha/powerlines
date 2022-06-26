@@ -17,9 +17,9 @@ let store = proxy({
 
   signIn: {
     email: '',
-    password: ''
+    password: '',
+    display_name: ''
   },
-  username: {"display_name": ''},
 
   hasAccount: true
 

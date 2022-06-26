@@ -9,7 +9,7 @@ const SignIn = () => {
 
   const snap = useSnapshot(store)
 
-  // sign up form handler
+  // sign in form handler
   const handleSignInForm = (e) => {
     const { id, value } = e.target;
     store.signIn = {
@@ -19,7 +19,7 @@ const SignIn = () => {
     store.username = {[id]:value};
   }
   
-  // creates copy of sign up form
+  // creates copy of sign in form
   const signInCopy = {
     email: store.signIn.email,
     password: store.signIn.password,
@@ -33,7 +33,7 @@ const SignIn = () => {
    }
 
 
-  // executes sign up
+  // executes sign in
   const signInWithEmail = async (e) => {
     e.preventDefault()
     const { user, session, error } = await supabase.auth.signIn(signInCopy)
@@ -50,7 +50,7 @@ const SignIn = () => {
   return (
     <Container>
       <SwitchToSignUp>Don't have an account yet?&nbsp; 
-        <SignUpLink onClick={() => { store.hasAccount = false}}>sign up</SignUpLink>&nbsp; instead.
+        <SignUpLink onClick={() => { store.hasAccount = true}}>Sign up</SignUpLink>&nbsp; instead.
       </SwitchToSignUp>
       <Form> 
         <FormField>
@@ -95,7 +95,7 @@ const Container = styled.div`
 `
 
 const Input = styled.input`
-  background-color: transparent;
+  background-color: white;
   border: .5px solid #222;
   font-family: IBM Plex Sans;
   font-size: 12px;
@@ -105,11 +105,12 @@ const Input = styled.input`
   padding: 5px;
   border-radius: 0px 3px 3px 0px;
   margin-bottom: 20px !important;
-  `
+`
 
 const Form = styled.form`
   display: flex;
-  flex-direction: column;`
+  flex-direction: column;
+`
 
 const FormLabel = styled.label`
   border: .5px solid #222;
@@ -135,7 +136,7 @@ const Button = styled.div`
   background-color: #222;
   cursor: pointer;
   margin-bottom: 5px !important;
-  border: .5px solid #222;
+  border: .5px solid #ffffffb3;
   transition: .1s;
   &:hover {
     opacity: .9;

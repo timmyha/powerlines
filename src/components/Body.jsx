@@ -10,10 +10,13 @@ const Body = () => {
 }
 
 const Content = styled.div`
+  position: absolute;
   background-color: #222;
   padding-top: 200px;
   height: 100vh;
+  width: 100%;
   padding-bottom: 900px;
+  z-index: 9999999999;
   `
 
 export default Body

@@ -17,7 +17,6 @@ const SignUp = () => {
       ...store.signIn,
       [id]: value
     }
-    store.username = {[id]:value};
   }
   
   // creates copy of sign up form
@@ -32,19 +31,22 @@ const SignUp = () => {
     const { user, session, error } = await supabase.auth.signUp(
       signUpCopy, {
         data: {
-        display_name: store.username.display_name
+        display_name: store.signIn.display_name
         }
       })
 
       if (error) {
         console.log(error)
+        toast.error('invalid entry')
+      } else {
+        toast.success('Check your email for confirmation.')
       }
   }
 
   return (
     <Container>
       <SwitchToSignIn>Already have an account?&nbsp; 
-        <SignInLink onClick={() => { store.hasAccount = true}}>sign in</SignInLink>&nbsp; instead.
+        <SignInLink onClick={() => { store.hasAccount = false}}>Sign in</SignInLink>&nbsp; instead.
       </SwitchToSignIn>
       <Form>
         <FormField>
@@ -106,7 +108,8 @@ const Container = styled.div`
 `
 
 const Input = styled.input`
-  background-color: transparent;
+  display: flex;
+  background-color: white;
   border: .5px solid #222;
   font-family: IBM Plex Sans;
   font-size: 12px;
@@ -116,6 +119,7 @@ const Input = styled.input`
   padding: 5px;
   border-radius: 0px 3px 3px 0px;
   margin-bottom: 20px !important;
+  z-index: 0;
   `
 
 const Form = styled.form`
@@ -146,7 +150,7 @@ const Button = styled.div`
   background-color: #222;
   cursor: pointer;
   margin-bottom: 5px !important;
-  border: .5px solid #222;
+  border: .5px solid #ffffffb3;
   transition: .1s;
   &:hover {
     opacity: .9;

@@ -33,8 +33,6 @@ function App() {
     let { data: profile, error } = await supabase
       .from('profile')
       .select('display_name')
-
-      console.log(profile)
       store.allUsers = profile
     }
     getAllUsers()
@@ -52,8 +50,6 @@ function App() {
     }
     getAllPosts()
   }, [])
-
-  console.log(store.allUsers[0])
   
   const handleDropdown = (id) => {
    return store.menu = {

@@ -5,23 +5,18 @@ import { useSnapshot } from 'valtio'
 import store from '../../store'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import UserProfile from './UserProfile'
 
 const UserInfo = () => {
 
-  const snap = useSnapshot(store)
   const user = supabase.auth.user()
-
-  const signOut = async() => {
-    const { error } = await supabase.auth.signOut()
-    store.menu.user = false;
-  }
 
   return (
 
     <Container>
       { user
-      ? <button onClick={() => signOut()}>sign out</button>
-      :  snap.hasAccount ? <SignIn /> : <SignUp />
+      ? <UserProfile />
+      :  store.hasAccount ? <SignUp /> : <SignIn />
       }
     </Container>
   )
