@@ -68,6 +68,7 @@ const SignIn = () => {
             onChange={handleSignInForm}
             placeholder="e-mail address"
             type="email"
+            required
           />
         </FormField>
         <FormField>
@@ -83,6 +84,7 @@ const SignIn = () => {
             id="password"
             type="password"
             placeholder="password"
+            required
           />
         </FormField>
         <Button onClick={(e) => signInWithEmail(e)}>Sign in with e-mail</Button>

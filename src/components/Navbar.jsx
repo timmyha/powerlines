@@ -16,21 +16,27 @@ const Navbar = ({ handleDropdown }) => {
         position="top-right"
         reverseOrder={false}
         toastOptions={{
-        className: '',
-        duration: 5000,
-        style: {
-          background: '#F1406A',
-          color: '#fff',
-          fontFamily: 'IBM Plex Sans',
-          fontSize: '13px',
-          borderRadius: '3px'
-        },
-        success: {
           duration: 5000,
-          theme: {
-            primary: 'green',
+          style: {
+            background: '#222',
+            color: 'white',
+            fontFamily: 'IBM Plex Sans',
+            fontSize: '13px',
+            borderRadius: '3px'
+          },
+          success: {
+            icon: '🟩 ',
+            style: {
+              background: '#222',
             },
-          }
+          },
+          error: {
+            icon: '🟥 ',
+            style: {
+              background: '#222',
+              border: '.5px solid #ffffffb3'
+            },
+          },
         }}
       />
       <MainLogo onClick={() => handleDropdown('closed')} className="mainlogo">
@@ -102,6 +108,7 @@ const RightNav = styled.div`
 
 const MainLogo = styled.h2`
   display: flex;
+  display: absolute;
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
@@ -110,7 +117,7 @@ const MainLogo = styled.h2`
   line-height: 83px;
   padding-left: 20px;
   color: #fff;
-  z-index: 10000000;
+  z-index: 20;
   padding-top: 0px;
   @media (max-width: 1300px) {
     font-size: 50px;
@@ -139,7 +146,7 @@ const MainLogoCollapse = styled.h2`
   font-size: 30px;
   width: 200px;
   line-height: 83px;
-  padding-left: 0px;
+  padding-left: 10px;
   color: #fff;
   padding-top: 6px;
     @media (min-width: 400px) {
@@ -215,7 +222,7 @@ const Username = styled.div`
 
 const UserCircle = styled.div`
     position: absolute;
-    top: 14px;
+    top: 11px;
     right: 16px;
     width: 40px;
     height: 40px;

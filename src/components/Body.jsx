@@ -16,7 +16,7 @@ const Content = styled.div`
   height: 100vh;
   width: 100%;
   padding-bottom: 900px;
-  z-index: 9999999999;
+  z-index: 10;
   `
 
 export default Body

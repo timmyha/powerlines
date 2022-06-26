@@ -9,39 +9,55 @@ const SignUp = () => {
 
   const snap = useSnapshot(store)
   const auth = supabase.auth.user()
+  const form = store.signIn
 
   // sign up form handler
   const handleSignUpForm = (e) => {
     const { id, value } = e.target;
     store.signIn = {
-      ...store.signIn,
+      ...form,
       [id]: value
     }
   }
   
   // creates copy of sign up form
   const signUpCopy = {
-    email: store.signIn.email,
-    password: store.signIn.password,
+    email: form.email,
+    password: form.password,
+  }
+
+  const usernameValidate = str => {
+    return /^[a-z]+$/.test(str);
   }
 
   // executes sign up
   const signUpWithEmail = async (e) => {
     e.preventDefault()
+    let length = form.display_name.length
+
+    if (
+      length < 3 || length > 20 || usernameValidate(form.display_name) === false
+      ) {
+      toast.error('Username must be lowercase, no symbols, and between 3-20 characters')
+    } else if (form.password.length < 6) {
+      toast.error('Password must be at least 6 characters.')
+    } else if (form.email < 1) {
+      toast.error('Please enter a valid e-mail address.')
+    } else {
     const { user, session, error } = await supabase.auth.signUp(
       signUpCopy, {
         data: {
-        display_name: store.signIn.display_name
+        display_name: form.display_name
         }
       })
 
       if (error) {
         console.log(error)
-        toast.error('invalid entry')
+        toast.error('Please enter a valid e-mail address.')
       } else {
         toast.success('Check your email for confirmation.')
       }
-  }
+  }}
 
   return (
     <Container>
@@ -64,6 +80,7 @@ const SignUp = () => {
             onChange={handleSignUpForm}
             placeholder="username"
             type="username"
+            required
           />
         </FormField>
         <FormField>
@@ -81,6 +98,7 @@ const SignUp = () => {
             onChange={handleSignUpForm}
             placeholder="e-mail address"
             type="email"
+            required
           />
         </FormField>
         <FormField>
@@ -96,6 +114,7 @@ const SignUp = () => {
             id="password"
             type="password"
             placeholder="password"
+            required
           />
         </FormField>
         <Button onClick={(e) => signUpWithEmail(e)}>Sign up with e-mail</Button>
