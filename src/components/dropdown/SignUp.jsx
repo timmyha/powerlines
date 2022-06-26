@@ -64,7 +64,7 @@ const SignUp = () => {
       <SwitchToSignIn>Already have an account?&nbsp; 
         <SignInLink onClick={() => { store.hasAccount = false}}>Sign in</SignInLink>&nbsp; instead.
       </SwitchToSignIn>
-      <Form>
+      <Form onClick={(e) => signUpWithEmail(e)}>
         <FormField>
           <FormLabel htmlFor="username">
             <RiUser3Fill
@@ -117,7 +117,7 @@ const SignUp = () => {
             required
           />
         </FormField>
-        <Button onClick={(e) => signUpWithEmail(e)}>Sign up with e-mail</Button>
+        <Button type="submit" onClick={(e) => signUpWithEmail(e)}>Sign up with e-mail</Button>
       </Form>
     </Container>
   )
