@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useSnapshot } from 'valtio'
 import store from '../../store'
 import SignUp from './SignUp'
-import SignIn from './Signin'
+import SignIn from './SignIn'
 
 const UserInfo = () => {
 
