@@ -2,15 +2,37 @@ import styled from "styled-components"
 import { useSnapshot } from 'valtio'
 import store from '../store'
 import supabase from "../../utils/supabase"
+import { Toaster } from "react-hot-toast"
 
 
 const Navbar = ({ handleDropdown }) => {
 
-  const state = useSnapshot(store)
+  const snap = useSnapshot(store)
   const user = supabase.auth.user()
 
   return (
     <Nav>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+        className: '',
+        duration: 5000,
+        style: {
+          background: '#F1406A',
+          color: '#fff',
+          fontFamily: 'IBM Plex Sans',
+          fontSize: '13px',
+          borderRadius: '3px'
+        },
+        success: {
+          duration: 5000,
+          theme: {
+            primary: 'green',
+            },
+          }
+        }}
+      />
       <MainLogo onClick={() => handleDropdown('closed')} className="mainlogo">
         <span style={{ "cursor": "pointer" }}>powerlines.</span>
       </MainLogo>
@@ -20,13 +42,13 @@ const Navbar = ({ handleDropdown }) => {
       <Links>
         <Genres onClick={() => handleDropdown('genres')}>
           <span
-            style={state.menu.genres ? { "color": "#F1406A" } : { "color": "white" }}>
+            style={snap.menu.genres ? { "color": "#F1406A" } : { "color": "white" }}>
             genres
           </span>
         </Genres>
         <Moods onClick={() => handleDropdown('moods')}>
           <span
-            style={state.menu.moods ? { "color": "#F3D25E" } : { "color": "white" }}>
+            style={snap.menu.moods ? { "color": "#F3D25E" } : { "color": "white" }}>
             moods
           </span>
         </Moods>
@@ -35,15 +57,15 @@ const Navbar = ({ handleDropdown }) => {
         <UserDiv onClick={() => handleDropdown('user')}>
           {user ?
             <>
-              <UserCircle style={user && { "background": `url(${state.userData.avatar})` }} />
+              <UserCircle style={user && { "background": `url(${snap.userData.avatar})` }} />
               <Username>
                 <span
-                  style={state.menu.user ? { "color": "#40F1BC" } : { "color": "white" }}>
-                  {state.userData.display_name}
+                  style={snap.menu.user ? { "color": "#40F1BC" } : { "color": "white" }}>
+                  {snap.userData.display_name}
                 </span>
               </Username>
             </>
-            : state.menu.user === true
+            : snap.menu.user === true
               ? <UserCircle style={user === null && { "background": "#222" }}>
                 <SignInText>
                   sign&nbsp;in.
@@ -201,7 +223,7 @@ const UserCircle = styled.div`
     cursor: pointer;
     transition: .2s;
     border-radius: 30px;
-    border: 1px solid #40F1BC;
+    border: .5px solid #40F1BC;
 `
 
 const SignInText = styled.span`

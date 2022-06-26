@@ -6,13 +6,23 @@ let store = proxy({
     moods: false,
     user: false
   },
+
   loading: true,
+
   data: [],
+
+  allUsers: [],
+
   userData: [],
+
   signIn: {
-    username: '',
+    email: '',
     password: ''
-  }
+  },
+  username: {"display_name": ''},
+
+  hasAccount: true
+
 })
 
 export default store

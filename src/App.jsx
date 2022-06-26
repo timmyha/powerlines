@@ -6,6 +6,7 @@ import Dropdown from './components/Dropdown'
 import { useSnapshot } from 'valtio'
 import supabase from '../utils/supabase'
 import store from './store'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
@@ -24,7 +25,35 @@ function App() {
     if (user) {
       getUserInfo();
     }
-  },[])
+  },[user])
+
+  // loads userlist
+  useEffect(() => {
+    const getAllUsers = async()=> {
+    let { data: profile, error } = await supabase
+      .from('profile')
+      .select('display_name')
+
+      console.log(profile)
+      store.allUsers = profile
+    }
+    getAllUsers()
+  }, [])
+  
+  // loads all blog posts
+  useEffect(() => {
+    async function getAllPosts() {
+    const { data: posts, error } = await supabase
+      .from('posts')
+      .select('*')
+
+      store.data = posts
+      store.loading = false
+    }
+    getAllPosts()
+  }, [])
+
+  console.log(store.allUsers[0])
   
   const handleDropdown = (id) => {
    return store.menu = {

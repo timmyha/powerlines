@@ -9,19 +9,6 @@ const AllPosts = () => {
 
   const snapshot = useSnapshot(store)
 
-  useEffect(() => {
-
-    async function getAllPosts() {
-    const { data: posts, error } = await supabase
-      .from('posts')
-      .select('*')
-
-      store.data = posts
-      store.loading = false
-    }
-    getAllPosts()
-  }, [])
-
   return (
     <>
     {

@@ -76,3 +76,7 @@ code {
   transition: .2s;
   background: inherit;
 }
+
+input:focus,textarea:focus{
+  outline: none;
+ }

@@ -1,16 +1,17 @@
 import styled from "styled-components"
-import { RiMailFill, RiLockFill } from 'react-icons/ri'
+import { RiUser3Fill, RiLockFill, RiMailFill } from 'react-icons/ri'
 import { useSnapshot } from "valtio"
 import store from "../../store"
 import supabase from "../../../utils/supabase"
 import toast from "react-hot-toast"
 
-const SignIn = () => {
+const SignUp = () => {
 
   const snap = useSnapshot(store)
+  const auth = supabase.auth.user()
 
   // sign up form handler
-  const handleSignInForm = (e) => {
+  const handleSignUpForm = (e) => {
     const { id, value } = e.target;
     store.signIn = {
       ...store.signIn,
@@ -20,39 +21,49 @@ const SignIn = () => {
   }
   
   // creates copy of sign up form
-  const signInCopy = {
+  const signUpCopy = {
     email: store.signIn.email,
     password: store.signIn.password,
   }
 
-  const handleDropdown = (id) => {
-    return store.menu = {
- 
-         [id]: !store.menu[id]
-       }
-   }
-
-
   // executes sign up
-  const signInWithEmail = async (e) => {
+  const signUpWithEmail = async (e) => {
     e.preventDefault()
-    const { user, session, error } = await supabase.auth.signIn(signInCopy)
+    const { user, session, error } = await supabase.auth.signUp(
+      signUpCopy, {
+        data: {
+        display_name: store.username.display_name
+        }
+      })
 
-    if (error) {
-      toast.error('Incorrect login information.')
-    }
-
-    if (user) {
-      window.location.reload();
-    }
+      if (error) {
+        console.log(error)
+      }
   }
 
   return (
     <Container>
-      <SwitchToSignUp>Don't have an account yet?&nbsp; 
-        <SignUpLink onClick={() => { store.hasAccount = false}}>sign up</SignUpLink>&nbsp; instead.
-      </SwitchToSignUp>
-      <Form> 
+      <SwitchToSignIn>Already have an account?&nbsp; 
+        <SignInLink onClick={() => { store.hasAccount = true}}>sign in</SignInLink>&nbsp; instead.
+      </SwitchToSignIn>
+      <Form>
+        <FormField>
+          <FormLabel htmlFor="username">
+            <RiUser3Fill
+              style={{
+                "paddingTop": "4px",
+                "color": "#40F1BC",
+                "width": "13px"
+              }}
+            />
+          </FormLabel>
+          <Input
+            id="display_name"
+            onChange={handleSignUpForm}
+            placeholder="username"
+            type="username"
+          />
+        </FormField>
         <FormField>
           <FormLabel htmlFor="email">
             <RiMailFill
@@ -65,7 +76,7 @@ const SignIn = () => {
           </FormLabel>
           <Input
             id="email"
-            onChange={handleSignInForm}
+            onChange={handleSignUpForm}
             placeholder="e-mail address"
             type="email"
           />
@@ -79,13 +90,13 @@ const SignIn = () => {
             }} />
           </FormLabel>
           <Input
-            onChange={handleSignInForm}
+            onChange={handleSignUpForm}
             id="password"
             type="password"
             placeholder="password"
           />
         </FormField>
-        <Button onClick={(e) => signInWithEmail(e)}>Sign in with e-mail</Button>
+        <Button onClick={(e) => signUpWithEmail(e)}>Sign up with e-mail</Button>
       </Form>
     </Container>
   )
@@ -131,7 +142,7 @@ const Button = styled.div`
   padding-top: 10px;
   border-radius: 3px;
   font-family: IBM Plex sans;
-  color: white;
+  color: inherit;
   background-color: #222;
   cursor: pointer;
   margin-bottom: 5px !important;
@@ -141,14 +152,14 @@ const Button = styled.div`
     opacity: .9;
   }`
 
-const SwitchToSignUp = styled.span`
+const SwitchToSignIn = styled.span`
   display: flex;
-  margin-left: 17px !important;
+  margin-left: 25px !important;
   font-style: italic;
   font-size: 12px;
   color: #222;`
 
-const SignUpLink = styled.span`
+const SignInLink = styled.span`
   font-weight: 800;
   margin-bottom: 3px !important;
   &:hover {
@@ -156,4 +167,4 @@ const SignUpLink = styled.span`
     cursor: pointer;
   }`
 
-export default SignIn
+export default SignUp
