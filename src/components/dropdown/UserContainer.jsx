@@ -7,7 +7,7 @@ import SignUp from './SignUp'
 import SignIn from './SignIn'
 import UserProfile from './UserProfile'
 
-const UserInfo = () => {
+const UserContainer = () => {
 
   const user = supabase.auth.user()
 
@@ -36,4 +36,4 @@ const Container = styled.nav`
 }
 `
 
-export default UserInfo
+export default UserContainer

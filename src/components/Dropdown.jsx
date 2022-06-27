@@ -4,7 +4,7 @@ import Genres from "./dropdown/Genres"
 import Moods from "./dropdown/Moods"
 import { useSnapshot } from 'valtio'
 import store from '../store'
-import UserInfo from "./dropdown/UserInfo"
+import UserContainer from "./dropdown/UserContainer"
 
 const Dropdown = ({ menu }) => {
 
@@ -18,21 +18,27 @@ const Dropdown = ({ menu }) => {
         data-genre={snap.genres}
         initial={{ y: 0}}
         className="genres"
-    ><Genres menu={menu}/></motion.div>
+      >
+        <Genres menu={menu}/>
+      </motion.div>
     : snap.moods 
     ? <motion.div
         layout
         data-mood={snap.moods}
         initial={{ y: 0}}
         className="moods"
-      ><Moods /></motion.div>
+      >
+        <Moods />
+      </motion.div>
     : snap.user 
     ? <motion.div
         layout
         data-user={snap.user}
         initial={{ y: 0}}
         className="user"
-      ><UserInfo /></motion.div>
+      >
+        <UserContainer />
+      </motion.div>
     : <motion.div layout className="child" />
     }
     </Container>

@@ -31,7 +31,7 @@ const SignUp = () => {
   }
 
   // executes sign up
-  const signUpWithEmail = async (e) => {
+  const signUpWithEmail = async(e) => {
     e.preventDefault()
     let length = form.display_name.length
 
@@ -62,7 +62,10 @@ const SignUp = () => {
   return (
     <Container>
       <SwitchToSignIn>Already have an account?&nbsp; 
-        <SignInLink onClick={() => { store.hasAccount = false}}>Sign in</SignInLink>&nbsp; instead.
+        <SignInLink 
+          onClick={() => { store.hasAccount = false}}>
+            Sign in
+        </SignInLink>&nbsp; instead.
       </SwitchToSignIn>
       <Form onClick={(e) => signUpWithEmail(e)}>
         <FormField>
