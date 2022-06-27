@@ -157,11 +157,14 @@ const UserMetrics = styled.span`
 
 const Bio = styled.span`
   display: flex;
+  margin-left: 0px !important;
   font-style: italic;
-  font-size: 14px;
-  color: #222;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
   width: 300px;
-  text-align: justify;
+  align-self: center;
+  color: #222;
   margin-bottom: 20px !important;`
 
 const Buttons = styled.div`
