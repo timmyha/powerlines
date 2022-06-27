@@ -25,7 +25,7 @@ function App() {
     if (user) {
       getUserInfo();
     }
-  },[user])
+  },[user, store.userData])
 
   // loads userlist
   useEffect(() => {

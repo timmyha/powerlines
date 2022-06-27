@@ -1,44 +1,115 @@
 import styled from "styled-components"
-import { RiUser3Fill, RiLockFill, RiMailFill } from 'react-icons/ri'
 import { useSnapshot } from "valtio"
 import store from "../../store"
 import supabase from "../../../utils/supabase"
 import toast from "react-hot-toast"
 import { GoSignOut } from 'react-icons/go'
+import { RiPencilFill , RiDeleteBin2Fill } from 'react-icons/ri'
 
 const UserProfile = () => {
 
   const snap = useSnapshot(store)
   const user = supabase.auth.user()
 
-  console.log(snap.userData)
-
-  const signOut = async() => {
+  const signOut = async () => {
     const { error } = await supabase.auth.signOut()
     store.menu.user = false;
   }
 
-  
+  const switchToEditForm = () => {
+    store.profileEdit = !store.profileEdit
+    store.profileEditForm = {
+      bio: store.userData.bio,
+      username: store.userData.display_name,
+      avatar: store.userData.avatar
+    }
+  }
+
+  const handleProfileEditForm = (e) => {
+    const { id, value } = e.target
+    store.profileEditForm = {
+      ...store.profileEditForm,
+      [id]: value
+    }
+  }
+
+  const handleUserProfileUpdate = async() => {
+    const { data, error } = await supabase
+      .from('profile')
+      .update({ 
+        bio: store.profileEditForm.bio,
+        display_name: store.profileEditForm.username,
+        avatar: store.profileEditForm.avatar
+       })
+      .eq('display_name', store.userData.display_name)
+
+      if (error) {
+        console.log(error)
+      }
+
+      store.profileEdit = false;
+  }
+
   return (
     <Container>
-        <ProfilePic src={snap.userData.avatar}></ProfilePic>
-        <Username>{snap.userData.display_name}</Username>
-        <UserMetrics>
-            <b>{snap.userData.posts.length}</b>
-            &nbsp;posts  
-            &nbsp;<b>{snap.userData.followers.length}</b> 
-            &nbsp;followers 
-            &nbsp;<b>{snap.userData.following.length}</b> 
-            &nbsp;following</UserMetrics>
-        <Bio>{snap.userData.bio}</Bio>
-        <Buttons>
-        <Button onClick={() => signOut()}>new post</Button>
-        <SignOut onClick={() => signOut()}>
+      <ProfilePicContainer>
+        {store.profileEdit === false
+          ? <>
+            <ProfilePic src={snap.userData.avatar}></ProfilePic>
+            <EditButton onClick={switchToEditForm}>
+              <RiPencilFill />
+            </EditButton>
+          </>
+          : <>
+            <Label>avatar url:&nbsp;</Label>
+            <EditInput
+              id="avatar"
+              onChange={(e) => handleProfileEditForm(e)}
+              value={store.profileEditForm.avatar}
+            />
+          </>
+        }
+      </ProfilePicContainer>
+      {store.profileEdit === false
+        ? <Username>{snap.userData.display_name}</Username>
+        : <UsernameField>
+          <Label>username:&nbsp;</Label>
+          <EditInput 
+            id="username"
+            onChange={(e) => handleProfileEditForm(e)}
+            value={snap.profileEditForm.username} />
+          </UsernameField>
+      }
+      <UserMetrics>
+        <b>{snap.userData.posts.length}</b>
+        &nbsp;posts
+        &nbsp;<b>{snap.userData.followers.length}</b>
+        &nbsp;followers
+        &nbsp;<b>{snap.userData.following.length}</b>
+        &nbsp;following</UserMetrics>
+      {store.profileEdit === false
+        ? <Bio>{snap.userData.bio}</Bio>
+        : <EditTextArea 
+            value={snap.profileEditForm.bio} 
+            id="bio"
+            onChange={(e) => handleProfileEditForm(e)}
+          />
+      }
+      <Buttons>
+        { store.profileEdit === false
+        ? <><Button>new post</Button>
+          <SignOut onClick={() => signOut()}>
           <GoSignOut
-            style={{"paddingTop":"3px", "paddingLeft":"5px"}} />
-        </SignOut>
-        </Buttons>
-      
+            style={{ "paddingTop": "3px", "paddingLeft": "5px" }} />
+          </SignOut></>
+        :  <><Button onClick={handleUserProfileUpdate}>save</Button>
+        <SignOut onClick={switchToEditForm}>
+        <RiDeleteBin2Fill
+          style={{ "paddingTop": "2px", "paddingLeft": "2px" }} />
+        </SignOut></>
+        }
+      </Buttons>
+
     </Container>
   )
 }
@@ -49,13 +120,20 @@ const Container = styled.div`
   margin-top: -20px !important;
 `
 
+const ProfilePicContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  `
+
 const ProfilePic = styled.img`
   width: 100px;
   height: 100px;
   align-self: center;
   margin-bottom: 10px !important;
   border: .5px solid #ffffffb3;
-  border-radius: 100%;`
+  border-radius: 100%;
+  `
 
 
 const Username = styled.span`
@@ -109,6 +187,27 @@ const Button = styled.div`
     opacity: .9;
   }`
 
+const EditButton = styled.button`
+  background-color: #222;
+  color: white;
+  width: 15px;
+  padding-left: 3px;
+  padding-top: 2px;
+  font-size: 10px;
+  border-radius: 2px;
+  height: 15px;
+  cursor: pointer;
+  border: none;`
+
+const EditInput = styled.input`
+  border: none;
+  margin-bottom: 10px !important;`
+
+const EditTextArea = styled.textarea`
+  border: none;
+  height: 100px;
+  margin-bottom: 10px !important;`
+
 const SignOut = styled.div`
   width: 40px;
   text-align: center;
@@ -125,5 +224,14 @@ const SignOut = styled.div`
   &:hover {
     opacity: .9;
   }`
+
+const UsernameField = styled.div`
+  display: flex;
+  flex-direction: row;`
+
+const Label = styled.span`
+  font-size: 12px;
+  color: #222;
+  font-family: IBM Plex Sans;`
 
 export default UserProfile

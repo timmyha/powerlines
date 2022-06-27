@@ -21,7 +21,15 @@ let store = proxy({
     display_name: ''
   },
 
-  hasAccount: true
+  hasAccount: true,
+
+  profileEdit: false,
+
+  profileEditForm: {
+    avatar: '',
+    username: '',
+    bio: ''
+  }
 
 })
 
