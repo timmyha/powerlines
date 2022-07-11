@@ -9,7 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: rgb(241,64,106);
-background: linear-gradient(90deg, rgba(241,64,106,1) 0%, rgba(241,64,106,1) 20%, rgba(243,210,94,1) 35%, rgba(243,210,94,1) 65%, rgba(64,241,188,1) 80%, rgba(64,241,188,1) 98%);
+  background: linear-gradient(90deg, rgba(241,64,106,1) 0%, rgba(241,64,106,1) 20%, rgba(243,210,94,1) 35%, rgba(243,210,94,1) 65%, rgba(64,241,188,1) 80%, rgba(64,241,188,1) 98%);
 }
 
 code {
@@ -17,6 +17,11 @@ code {
     monospace;
 }
 
+input:focus,textarea:focus{
+  outline: none;
+ }
+
+ /* below handles the dropdown menu's framer motion css */
 .genres {
   background: black;
   margin-top: 60px !important;
@@ -75,7 +80,3 @@ code {
   transition: .2s;
   background: inherit;
 }
-
-input:focus,textarea:focus{
-  outline: none;
- }
