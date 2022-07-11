@@ -18,24 +18,14 @@ function App() {
       let { data: profile, error } = await supabase
       .from('profile')
       .select('*')
-
+      if (profile !== null) {
       store.userData = profile[0]
+      }
     }
-    if (user) {
-      getUserInfo();
-    }
+      if (user) {
+        getUserInfo();
+      }
   },[user, store.userData])
-
-  // loads userlist
-  useEffect(() => {
-    const getAllUsers = async()=> {
-    let { data: profile, error } = await supabase
-      .from('profile')
-      .select('display_name')
-      store.allUsers = profile
-    }
-    getAllUsers()
-  }, [])
   
   // loads all blog posts
   useEffect(() => {
