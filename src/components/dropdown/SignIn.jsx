@@ -16,9 +16,9 @@ const SignIn = () => {
       ...store.signIn,
       [id]: value
     }
-    store.username = {[id]:value};
+    store.username = { [id]: value };
   }
-  
+
   // creates copy of sign in form
   const signInCopy = {
     email: store.signIn.email,
@@ -27,11 +27,9 @@ const SignIn = () => {
 
   const handleDropdown = (id) => {
     return store.menu = {
- 
-         [id]: !store.menu[id]
-       }
-   }
-
+      [id]: !store.menu[id]
+    }
+  }
 
   // executes sign in
   const signInWithEmail = async (e) => {
@@ -43,16 +41,16 @@ const SignIn = () => {
     }
 
     if (user) {
-      window.location.reload();
+      handleDropdown('closed')
     }
   }
 
   return (
     <Container>
-      <SwitchToSignUp>Don't have an account yet?&nbsp; 
-        <SignUpLink onClick={() => { store.hasAccount = true}}>Sign up</SignUpLink>&nbsp; instead.
+      <SwitchToSignUp>Don't have an account yet?&nbsp;
+        <SignUpLink onClick={() => { store.hasAccount = true }}>Sign up</SignUpLink>&nbsp; instead.
       </SwitchToSignUp>
-      <Form  onClick={(e) => signInWithEmail(e)}> 
+      <Form onSubmit={(e) => signInWithEmail(e)}>
         <FormField>
           <FormLabel htmlFor="email">
             <RiMailFill
@@ -87,7 +85,9 @@ const SignIn = () => {
             required
           />
         </FormField>
-        <Button type="submit" onClick={(e) => signInWithEmail(e)}>Sign in with e-mail</Button>
+        <Button type="submit" onClick={(e) => signInWithEmail(e)}>
+          Sign in with e-mail
+        </Button>
       </Form>
     </Container>
   )
@@ -106,26 +106,22 @@ const Input = styled.input`
   width: 175px;
   padding: 5px;
   border-radius: 0px 3px 3px 0px;
-  margin-bottom: 20px !important;
-`
+  margin-bottom: 20px !important;`
 
 const Form = styled.form`
   display: flex;
-  flex-direction: column;
-`
+  flex-direction: column;`
 
 const FormLabel = styled.label`
   border: .5px solid #222;
   height: 25px;
   border-radius: 3px 0px 0px 3px;
   padding: 5px 15px 5px 15px;
-  background-color: #222;
-  `
+  background-color: #222;`
 
 const FormField = styled.div`
   display: flex;
-  flex-direction: row;
-  `
+  flex-direction: row;`
 
 const Button = styled.div`
   width: 234px;

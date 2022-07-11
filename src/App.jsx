@@ -6,7 +6,6 @@ import Dropdown from './components/Dropdown'
 import { useSnapshot } from 'valtio'
 import supabase from '../utils/supabase'
 import store from './store'
-import { Toaster } from 'react-hot-toast'
 
 function App() {
 
@@ -45,15 +44,22 @@ function App() {
       .from('posts')
       .select('*')
 
+      if (error) {
+        store.data = [{
+          title: loading,
+          content: loading
+        }]
+        store.loading = true
+      } else {
       store.data = posts
       store.loading = false
+      }
     }
     getAllPosts()
   }, [])
   
   const handleDropdown = (id) => {
    return store.menu = {
-
         [id]: !store.menu[id]
       }
   }

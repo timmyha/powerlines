@@ -6,7 +6,6 @@ import styled from 'styled-components'
 
 const AllPosts = () => {
 
-
   const snapshot = useSnapshot(store)
 
   return (

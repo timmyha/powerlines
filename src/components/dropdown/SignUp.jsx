@@ -67,7 +67,7 @@ const SignUp = () => {
             Sign in
         </SignInLink>&nbsp; instead.
       </SwitchToSignIn>
-      <Form onClick={(e) => signUpWithEmail(e)}>
+      <Form onSubmit={(e) => signUpWithEmail(e)}>
         <FormField>
           <FormLabel htmlFor="username">
             <RiUser3Fill

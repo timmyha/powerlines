@@ -11,11 +11,13 @@ const UserProfile = () => {
   const snap = useSnapshot(store)
   const user = supabase.auth.user()
 
+  //executes user sign out
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
     store.menu.user = false;
   }
 
+  // cycles between profileEdit state true/false
   const switchToEditForm = () => {
     store.profileEdit = !store.profileEdit
     store.profileEditForm = {
@@ -25,6 +27,7 @@ const UserProfile = () => {
     }
   }
 
+  // populates form state for profile edit
   const handleProfileEditForm = (e) => {
     const { id, value } = e.target
     store.profileEditForm = {
@@ -33,6 +36,7 @@ const UserProfile = () => {
     }
   }
 
+  // executes profile update with form information
   const handleUserProfileUpdate = async() => {
     const { data, error } = await supabase
       .from('profile')
@@ -46,7 +50,6 @@ const UserProfile = () => {
       if (error) {
         console.log(error)
       }
-
       store.profileEdit = false;
   }
 
