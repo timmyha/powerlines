@@ -4,6 +4,7 @@ import AllPosts from '../pages/AllPosts'
 const Body = () => {
   return (
     <Content>
+      hi
       <AllPosts />
     </Content>
   )
@@ -12,7 +13,7 @@ const Body = () => {
 const Content = styled.div`
   position: absolute;
   background-color: #222;
-  padding-top: 200px;
+  padding-top: 50px;
   height: 100vh;
   width: 100%;
   padding-bottom: 900px;

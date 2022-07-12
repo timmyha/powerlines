@@ -26,7 +26,21 @@ function App() {
         getUserInfo();
       }
   },[user, store.userData])
-  
+
+  // loads userlist
+  useEffect(() => {
+    const getUserList = async() => {
+      let { data: profile, error } = await supabase
+        .from('profile')
+        .select('display_name')
+
+        store.allUsers = profile
+    }
+    if (user) {
+    getUserList()
+    }
+  }, [])
+
   // loads all blog posts
   useEffect(() => {
     async function getAllPosts() {
